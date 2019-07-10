@@ -44,7 +44,10 @@ echo " done"
 MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
 
 echo -n "-----> Installing settings.xml..."
-mkdir .m2
+if [! -f .m2 ]; then
+  mkdir .m2
+fi
+
 if [ -f .m2/settings.xml ]; then
   rm .m2/settings.xml 
 fi
