@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# fail fast
+set -e
+
+# config
+TOMEE_VERSION="1.7.0"
+
+BIN_DIR=$(dirname $0)
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
+. bin/java
+
+echo "java.runtime.version=1.7" > ${BUILD_DIR}/system.properties
+
+logger -p user.notice -t "slugc[$$]" "language_pack_java download_jdk"
+LOGGER_FLAGS="$LOGGER_FLAGS download_jdk"
+javaVersion=$(detect_java_version ${BUILD_DIR})
+echo -n "-----> Installing OpenJDK ${javaVersion}..."
+install_java ${BUILD_DIR} ${javaVersion}
+jdk_overlay ${BUILD_DIR}
+echo "done"
+
+#create the cache dir if it doesn't exist
+mkdir -p $CACHE_DIR
+
+# change to cache dir to install maven
+cd $CACHE_DIR
+
+# install maven with base repository
+MAVEN_URL="http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz"
+
+echo -n "-----> Installing Maven 3.2.5..."
+curl --silent --max-time 60 --location $MAVEN_URL | tar xz
+mv apache-maven-3.2.5 .maven
+chmod +x .maven/bin/mvn
+echo " done"
+
+
+MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
+
+echo -n "-----> Installing settings.xml..."
+mkdir .m2
+if [ -f .m2/settings.xml ]; then
+  rm .m2/settings.xml 
+fi
+curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
+echo " done"
+
+# change to build dir to run maven
+cd $BUILD_DIR
+
+export MAVEN_OPTS="-Xmx512m"
+
+# build app
+BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true clean install"
+echo "-----> executing $BUILDCMD"
+
+$BUILDCMD 2>&1 | sed -u 's/^/       /'
+
+if [ "${PIPESTATUS[*]}" != "0 0" ]; then
+  echo " !     Failed to build app with Maven"
+  exit 1
+fi
+
+# include .files when moving things around
+shopt -s dotglob
+
+cd $BUILD_DIR
+
+TOMEE_URL="http://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
+echo "-----> Bundling TomEE version $TOMEE_VERSION"
+curl --silent --location "$TOMEE_URL" | tar xz
+rm -fr $BUILD_DIR/apache-tomee-plus-$TOMEE_VERSION/webapps/*
+
+
+cat >>boot.sh <<EOF
+# Only one port is allowed
+sed -i "s/8080/\$PORT/g" ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
+sed -i "s/8005/-1/g"     ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
+sed -i "s/.*8009.*//g"   ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
+
+mv ~/target/*.war ~/apache-tomee-plus-$TOMEE_VERSION/webapps/ROOT.war
+~/apache-tomee-plus-$TOMEE_VERSION/bin/catalina.sh run
+EOF
+
+chmod +x boot.sh
+
+# clean the cache
+rm -rf $CACHE_DIR
