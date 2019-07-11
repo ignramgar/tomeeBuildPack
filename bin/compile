@@ -25,6 +25,10 @@ install_java ${BUILD_DIR} ${javaVersion}
 jdk_overlay ${BUILD_DIR}
 echo "done"
 
+if [ -z "$JAVA_HOME" ] ; then
+    JAVA_HOME=`java-config --jre-home`
+fi
+
 #create the cache dir if it doesn't exist
 mkdir -p $CACHE_DIR
 
