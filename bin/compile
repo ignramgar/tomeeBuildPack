@@ -17,7 +17,7 @@ env_dir=$ENV_DIR
 cd $env_dir
 ls -altr
 
-profile=`cat MAVEN_CUSTOM_GOALS`
+profile=`cat PROFILE`
 echo "El profile es $profile"
 	
 VAR = cat MAVEN_CUSTOM_GOALS
