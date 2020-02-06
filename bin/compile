@@ -18,6 +18,8 @@ echo "variables $ENV_DIR"
   	ls -altr
   	whitelist_regex=${2:-''}
   	blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+  	
+  	cat MAVEN_CUSTOM_GOALS
 
     for e in $(ls $env_dir); do
     	echo "$e"
@@ -26,7 +28,7 @@ echo "variables $ENV_DIR"
       	:
    	done
    	
-   	echo $MAVEN_CUSTOM_GOALS
+   	echo "MAVEN_CUSTOM_GOALS $MAVEN_CUSTOM_GOALS"
 
 
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
