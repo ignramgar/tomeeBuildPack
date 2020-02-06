@@ -12,29 +12,15 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-echo "variables $ENV_DIR"
-  	env_dir=$ENV_DIR
-  	cd $env_dir
-  	ls -altr
-  	whitelist_regex=${2:-''}
-  	blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-  	
 
-  	
-  	file1=`cat MAVEN_CUSTOM_GOALS`
-	echo $file1
+env_dir=$ENV_DIR
+cd $env_dir
+ls -altr
+
+profile=`cat MAVEN_CUSTOM_GOALS`
+echo "El profile es $profile"
 	
-	  	VAR = cat MAVEN_CUSTOM_GOALS
-
-    for e in $(ls $env_dir); do
-    	echo "$e"
-    	echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-      	VAR=$(cat $env_dir/$e)
-      	echo "XXX $VAR"
-      	:
-   	done
-   	
-   	
+VAR = cat MAVEN_CUSTOM_GOALS
 
 
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
