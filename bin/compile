@@ -24,8 +24,8 @@ echo "variables $ENV_DIR"
     for e in $(ls $env_dir); do
     	echo "$e"
     	echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-      	$e=$(cat $env_dir/$e)
-      	echo "XXX $e "
+      	VAR=$(cat $env_dir/$e)
+      	echo "XXX $VAR"
       	:
    	done
    	
