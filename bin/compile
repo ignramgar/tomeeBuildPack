@@ -24,11 +24,12 @@ echo "variables $ENV_DIR"
     for e in $(ls $env_dir); do
     	echo "$e"
     	echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-      	export "$e=$(cat $env_dir/$e)"
+      	$e=$(cat $env_dir/$e)
+      	echo "XXX $e "
       	:
    	done
    	
-   	echo "MAVEN_CUSTOM_GOALS $MAVEN_CUSTOM_GOALS"
+   	
 
 
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
