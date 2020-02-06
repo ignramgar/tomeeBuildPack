@@ -78,7 +78,7 @@ cd $BUILD_DIR
 
 TOMEE_URL="http://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
 echo "-----> Bundling TomEE version $TOMEE_VERSION"
-curl --silent --location "$TOMEE_URL" | gunzip | tar xv
+curl --silent --location "$TOMEE_URL" | file 
 rm -fr $BUILD_DIR/apache-tomee-plus-$TOMEE_VERSION/webapps/*
 
 
