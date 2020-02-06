@@ -75,13 +75,10 @@ fi
 shopt -s dotglob
 
 cd $BUILD_DIR
-echo $BUILD_DIR
-ls -altr
 
-TOMEE_URL="http://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
-echo "------> Bundling TomEE version $TOMEE_VERSION"
-curl --silent --location "$TOMEE_URL" 
-ls -altr
+TOMEE_URL="https://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
+echo "-----> Bundling TomEE version $TOMEE_VERSION"
+curl --silent --location "$TOMEE_URL" | tar xz
 rm -fr $BUILD_DIR/apache-tomee-plus-$TOMEE_VERSION/webapps/*
 
 
