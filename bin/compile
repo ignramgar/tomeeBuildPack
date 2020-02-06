@@ -11,11 +11,11 @@ BIN_DIR=$(dirname $0)
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-
-	echo "variables $ENV_DIR"
+echo "variables $ENV_DIR"
   	env_dir=$ENV_DIR
+  	cd $env_dir
+  	ls -altr
   	whitelist_regex=${2:-''}
   	blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
   	if [ -d "$env_dir" ]; then
@@ -26,6 +26,7 @@ LP_DIR=`cd $(dirname $0); cd ..; pwd`
    		done
   	fi
 
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack-common.tar.gz | tar xz
 . bin/java
