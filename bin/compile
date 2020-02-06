@@ -19,8 +19,6 @@ ls -altr
 
 profile=`cat PROFILE`
 echo "El profile es $profile"
-	
-VAR = cat MAVEN_CUSTOM_GOALS
 
 
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
