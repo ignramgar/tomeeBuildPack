@@ -19,7 +19,10 @@ echo "variables $ENV_DIR"
   	whitelist_regex=${2:-''}
   	blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
   	
-  	cat MAVEN_CUSTOM_GOALS
+  	VAR = cat MAVEN_CUSTOM_GOALS
+  	
+  	file1=`cat MAVEN_CUSTOM_GOALS`
+	echo $file1
 
     for e in $(ls $env_dir); do
     	echo "$e"
