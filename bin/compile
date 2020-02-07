@@ -44,10 +44,9 @@ mkdir -p $CACHE_DIR
 cd $CACHE_DIR
 
 # install maven with base repository
-MAVEN_URL="http://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz"
+MAVEN_URL="https://www.us.apache.org/dist/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz"
 
 echo -n "-----> Installing Maven 3.2.5..."
-echo "Var MAVEN_CUSTOM_GOALS $MAVEN_CUSTOM_GOALS"
 curl --silent --max-time 60 --location $MAVEN_URL | tar xz
 mv apache-maven-3.2.5 .maven
 chmod +x .maven/bin/mvn
