@@ -66,6 +66,7 @@
     -->
     <mirror>
 		<id>central</id>
+		<mirrorOf>central</mirrorOf>
 		<name>Central Repository</name>
 		<url>https://repo.maven.apache.org/maven2</url>
 	</mirror>
