@@ -48,7 +48,7 @@ MAVEN_URL="http://www.us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-mav
 
 echo -n "-----> Installing Maven 3.2.5..."
 curl --silent --max-time 60 --location $MAVEN_URL | tar xz
-mv apache-maven-3.2.5 .maven
+mv apache-maven-3.5.4 .maven
 chmod +x .maven/bin/mvn
 echo " done"
 
