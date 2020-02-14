@@ -44,16 +44,17 @@ mkdir -p $CACHE_DIR
 cd $CACHE_DIR
 
 # install maven with base repository
-MAVEN_URL="http://www.us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz"
+MAVEN_URL="http://www.us.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
 
-echo -n "-----> Installing Maven 3.2.5..."
+echo -n "-----> Installing Maven 3.6.3..."
 curl --silent --max-time 60 --location $MAVEN_URL | tar xz
-mv apache-maven-3.5.4 .maven
+mv apache-maven-3.6.3 .maven
 chmod +x .maven/bin/mvn
 echo " done"
 
 
-MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
+#MAVEN_SETTINGS_URL="http://s3.amazonaws.com/heroku-jvm-langpack-java/settings.xml"
+MAVEN_SETTINGS_URL="https://raw.githubusercontent.com/ignramgar/tomeeBuildPack/master/conf/settings.xml"
 
 echo -n "-----> Installing settings.xml..."
 #if [! -f .m2 ]; then
