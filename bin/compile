@@ -5,7 +5,7 @@
 set -e
 
 # config
-TOMEE_VERSION="1.7.0"
+TOMEE_VERSION="8.0.1"
 
 BIN_DIR=$(dirname $0)
 BUILD_DIR=$1
@@ -88,7 +88,10 @@ shopt -s dotglob
 
 cd $BUILD_DIR
 
-TOMEE_URL="https://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
+
+
+# TOMEE_URL="https://repo1.maven.org/maven2/org/apache/openejb/apache-tomee/$TOMEE_VERSION/apache-tomee-$TOMEE_VERSION-plus.tar.gz"
+TOMEE_URL="http://www.mirrorservice.org/sites/ftp.apache.org/tomee/tomee-8.0.1/apache-tomee-8.0.1-plus.tar.gz"
 echo "-----> Bundling TomEE version $TOMEE_VERSION"
 curl --silent --location "$TOMEE_URL" | tar xz
 rm -fr $BUILD_DIR/apache-tomee-plus-$TOMEE_VERSION/webapps/*
