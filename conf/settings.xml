@@ -78,12 +78,7 @@
       <id>defaultProfile</id>
       <repositories>
 	  
-		<repository>
-          <id>jasper</id>
-          <url>http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>false</enabled></snapshots>
-        </repository>
+		
         <repository>
           <id>central</id>
           <url>http://repo1.maven.org/maven2/</url>
@@ -122,7 +117,13 @@
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
 		
-		
+		<repository>
+			<id>liferay-ce</id>
+			<name>Liferay CE</name>
+			<url>https://repository.liferay.com/nexus/content/groups/public/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
@@ -131,7 +132,13 @@
           <releases><enabled>true</enabled></releases>
           <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
-		
+        
+		<pluginRepository>
+			<id>liferay-ce</id>
+			<url>https://repository.liferay.com/nexus/content/groups/public/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
       </pluginRepositories>
       <activation>
           <activeByDefault>true</activeByDefault>
