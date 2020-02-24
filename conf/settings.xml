@@ -78,12 +78,7 @@
       <id>defaultProfile</id>
       <repositories>
 	  
-		<repository>
-          <id>jasper</id>
-          <url>http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>false</enabled></snapshots>
-        </repository>
+		
         <repository>
           <id>central</id>
           <url>http://repo1.maven.org/maven2/</url>
@@ -97,7 +92,11 @@
             <url>http://repository.primefaces.org</url>
         </repository>
 		
-		
+		<repository>
+          <id>maven2-repository.dev.java.net</id>
+          <name>Java.net Repository for Maven</name>
+          <url>https://maven-us.nuxeo.org/nexus/content/repositories/public</url>
+        </repository>
 		
 		
 		
