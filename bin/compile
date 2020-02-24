@@ -70,6 +70,8 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR/am-heroku-war
 
+echo $BUILD_DIR
+
 export MAVEN_OPTS="-Xmx512m"
 
 # build app
