@@ -103,7 +103,7 @@ sed -i "s/8080/\$PORT/g" ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
 sed -i "s/8005/-1/g"     ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
 sed -i "s/.*8009.*//g"   ~/apache-tomee-plus-$TOMEE_VERSION/conf/server.xml
 
-mv ~/target/*.war ~/apache-tomee-plus-$TOMEE_VERSION/webapps/ROOT.war
+mv ~/am-heroku-war/target/*.war ~/apache-tomee-plus-$TOMEE_VERSION/webapps/ROOT.war
 ~/apache-tomee-plus-$TOMEE_VERSION/bin/catalina.sh run
 EOF
 
