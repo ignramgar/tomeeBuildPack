@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <!-- localRepository
+   | The path to the local mirror maven will use to store artifacts.
+   |
+   | Default: ~/.m2/mirror
+  <localRepository>/path/to/local/repo</localRepository>
+  -->
 
+  <!-- interactiveMode
+   | This will determine whether maven prompts you when it needs input. If set to false,
+   | maven will use a sensible default value, perhaps based on some other setting, for
+   | the parameter in question.
+   |
+   | Default: true
+  <interactiveMode>true</interactiveMode>
+  -->
+
+  <!-- offline
+   | Determines whether maven should attempt to connect to the network when executing a build.
+   | This will have an effect on artifact downloads, artifact deployment, and others.
+   |
+   | Default: false
+  <offline>false</offline>
+  -->
+
+  <!-- proxies
+  | This is a list of proxies which can be used on this machine to connect to the network.
+  | Unless otherwise specified (by system property or command-line switch), the first proxy
+  | specification in this list marked as active will be used.
+  |-->
   <proxies>
-   
+    <!-- proxy
+     | Specification for one proxy, to be used in connecting to the network.
+     |
+    <proxy>
+      <id>optional</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <username>proxyuser</username>
+      <password>proxypass</password>
+      <host>proxy.host.net</host>
+      <port>80</port>
+      <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+    </proxy>
+    -->
   </proxies>
 
   <!-- mirrors
@@ -36,7 +77,15 @@
     <profile>
       <id>defaultProfile</id>
       <repositories>
-
+	  
+		
+        <repository>
+          <id>central</id>
+          <url>http://repo1.maven.org/maven2/</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+		
 		<repository>
             <id>prime-repo</id>
             <name>PrimeFaces Maven Repository</name>
@@ -48,11 +97,48 @@
           <name>Java.net Repository for Maven</name>
           <url>https://maven-us.nuxeo.org/nexus/content/repositories/public</url>
         </repository>
-
+		<repository>
+			<id>Activiti</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>spring-extensions-milestone</id>
+			<name>Spring Extensions Milestone Repository</name>
+			<url>http://extensions.springframework.org/milestone</url>
+		</repository>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+		
+		<repository>
+			<id>liferay-ce</id>
+			<name>Liferay CE</name>
+			<url>https://repository.liferay.com/nexus/content/groups/public/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
       </repositories>
-      
-    
-      
+      <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://repo1.maven.org/maven2/</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+        </pluginRepository>
+		<pluginRepository>
+			<id>liferay-ce</id>
+			<url>https://repository.liferay.com/nexus/content/groups/public/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</pluginRepository>
+      </pluginRepositories>
       <activation>
           <activeByDefault>true</activeByDefault>
       </activation>
