@@ -68,7 +68,7 @@ curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings
 echo " done"
 
 # change to build dir to run maven
-cd $BUILD_DIR
+cd $BUILD_DIR/am-heroku-war
 
 export MAVEN_OPTS="-Xmx512m"
 
