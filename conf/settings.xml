@@ -78,7 +78,12 @@
       <id>defaultProfile</id>
       <repositories>
 	  
-		
+		<repository>
+          <id>jasper</id>
+          <url>http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>false</enabled></snapshots>
+        </repository>
         <repository>
           <id>central</id>
           <url>http://repo1.maven.org/maven2/</url>
@@ -97,8 +102,15 @@
           <name>Java.net Repository for Maven</name>
           <url>https://maven-us.nuxeo.org/nexus/content/repositories/public</url>
         </repository>
-		
-		
+		<repository>
+			<id>Activiti</id>
+			<url>http://maven.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>spring-extensions-milestone</id>
+			<name>Spring Extensions Milestone Repository</name>
+			<url>http://extensions.springframework.org/milestone</url>
+		</repository>
 		<repository>
 			<id>maven-restlet</id>
 			<name>Public online Restlet repository</name>
@@ -125,12 +137,7 @@
           <releases><enabled>true</enabled></releases>
           <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
-		<pluginRepository>
-			<id>liferay-ce</id>
-			<url>https://repository.liferay.com/nexus/content/groups/public/</url>
-			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
-		</pluginRepository>
+		
       </pluginRepositories>
       <activation>
           <activeByDefault>true</activeByDefault>
