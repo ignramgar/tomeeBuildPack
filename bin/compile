@@ -80,7 +80,7 @@ echo $BUILD_DIR
 export MAVEN_OPTS="-Xmx512m"
 
 # build app
-BUILDCMD="$CACHE_DIR/.maven/bin/mvn -U -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true  package $profile"
+BUILDCMD="$CACHE_DIR/.maven/bin/mvn -U -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true  clean package $profile"
 echo "-----> executing $BUILDCMD"
 
 $BUILDCMD 2>&1 | sed -u 's/^/       /'
