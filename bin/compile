@@ -3,7 +3,6 @@
 
 # fail fast
 set -e
-set -x
 
 # config
 TOMEE_VERSION="8.0.1"
